@@ -1,6 +1,5 @@
 import pygame
 import time
-import asyncio
 
 class Solution:
     def __init__(self):
@@ -48,9 +47,11 @@ class Solution:
         # Define constants
         TILE_SIZE = 40
         TILE_MARGIN = 5
+        LEGEND_SIZE = 20
+        LEGEND_MARGIN = 3
         TILES_X = len(self.grid_history[0][0])
         TILES_Y = len(self.grid_history[0])
-        LEGEND_WIDTH = 200
+        LEGEND_WIDTH = 250
         WINDOW_WIDTH = TILES_X * (TILE_SIZE + TILE_MARGIN) + LEGEND_WIDTH
         WINDOW_HEIGHT = TILES_Y * (TILE_SIZE + TILE_MARGIN)
 
@@ -59,7 +60,7 @@ class Solution:
             1: (0, 255, 0),  # Green for the start tile
             0: (255, 255, 255),  # White for empty tiles
             2: (255, 0, 0),  # Red for the end tile
-            -1: (0, 0, 0),  # Black for blocked tiles
+            -1: (72, 72, 72),  # Black for blocked tiles
             -2: (0, 0, 255)  # Blue for visited tiles
         }
 
@@ -87,11 +88,11 @@ class Solution:
         # Function to draw the legend
         def draw_legend():
             for i, color in enumerate(COLORS):
-                rect = pygame.Rect(WINDOW_WIDTH - LEGEND_WIDTH + 10, i*(TILE_SIZE+TILE_MARGIN) + 10, TILE_SIZE, TILE_SIZE)
+                rect = pygame.Rect(WINDOW_WIDTH - LEGEND_WIDTH + 50, i*(LEGEND_SIZE+LEGEND_MARGIN) + 10, LEGEND_SIZE, LEGEND_SIZE)
                 pygame.draw.rect(window, COLORS[color], rect)
 
                 text = font.render(DESCRIPTIONS[color], True, (255, 255, 255))
-                window.blit(text, (WINDOW_WIDTH - LEGEND_WIDTH + 10 + TILE_SIZE + 10, i*(TILE_SIZE+TILE_MARGIN) + 10))
+                window.blit(text, (WINDOW_WIDTH - LEGEND_WIDTH + 50 + LEGEND_SIZE + 10, i*(LEGEND_SIZE+LEGEND_MARGIN) + 10))
 
         # Function to update the window
         def update_window(grid):
@@ -118,11 +119,8 @@ class Solution:
             time.sleep(0.5)  # Delay to make the animation visible
         return True
 
-async def main():
+
+if __name__ == "__main__":
     s = Solution()
     grid = [[1,0,0,0],[0,0,0,0],[2,0,0,-1]]
     s.uniquePathsIII(grid)
-    await asyncio.sleep(0)
-if __name__ == "__main__":
-    asyncio.run(main())
-
