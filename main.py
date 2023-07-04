@@ -60,7 +60,7 @@ class Solution:
             1: (0, 255, 0),  # Green for the start tile
             0: (255, 255, 255),  # White for empty tiles
             2: (255, 0, 0),  # Red for the end tile
-            -1: (72, 72, 72),  # Black for blocked tiles
+            -1: (72, 72, 72),  # Gray for blocked tiles
             -2: (0, 0, 255)  # Blue for visited tiles
         }
 
