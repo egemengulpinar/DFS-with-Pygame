@@ -5,10 +5,11 @@ class Solution:
     def __init__(self):
         self.res = 0
         self.grid_history = []
-        self.solution_path = []
 
-    def uniquePathsIII(self, grid):
+    def uniquePaths(self, grid):
         m, n, empty = len(grid), len(grid[0]), 1
+        print(len(grid))
+        print(len(grid[0]))
         for i in range(m):
             for j in range(n):
                 if grid[i][j] == 1:
@@ -28,13 +29,11 @@ class Solution:
         if (x, y) == end:
             if empty == 0:
                 self.res += 1
-                self.solution_path = [row[:] for row in grid]
                 response = self.animate_solution(blank=False)
             return 
 
         # Save the current state of the grid for animation
         self.grid_history.append([row[:] for row in grid])
-
         grid[x][y] = -2
         self.dfs(grid, x + 1, y, end, empty - 1)
         self.dfs(grid, x - 1, y, end, empty - 1)
@@ -110,8 +109,8 @@ class Solution:
         text = font.render("FOUND : {}".format(self.res), True, (255, 0, 0))
         window.blit(text, (WINDOW_WIDTH / 2 - text.get_width() / 2, WINDOW_HEIGHT / 2 - text.get_height() / 2))
         pygame.display.flip()
-        time.sleep(2)
-        for grid_state in self.grid_history[-10::1]:
+        time.sleep(3)
+        for grid_state in self.grid_history[-15::1]:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:  # Quit the game
                     return
@@ -122,5 +121,5 @@ class Solution:
 
 if __name__ == "__main__":
     s = Solution()
-    grid = [[1,0,0,0],[0,0,0,0],[2,0,0,-1]]
-    s.uniquePathsIII(grid)
+    grid = [[1,0,0,0,0,0],[0,0,0,0,0,0],[2,0,0,-1,0,0],[0,0,-1,0,0,0],[0,0,0,0,-1,0],[0,0,0,0,0,0]]
+    s.uniquePaths(grid)
