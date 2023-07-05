@@ -1,4 +1,4 @@
-# dfs-backtracking
+# DFS-with-Pygame
 
 This repo solves the question below creating with Pygame animation.
 We found all possible ways to **ending square** and display it on the Pygame UI
